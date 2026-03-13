@@ -1,0 +1,159 @@
+# AI Chief of Staff — Starter Kit
+
+Build a personal AI system that knows how you work, preps your meetings, reviews your week, and gets smarter over time.
+
+> **Just want the quick version?** Read **[start-here.md](start-here.md)** — a one-page guide to building your first AI agent in about an hour.
+
+---
+
+## What This Is
+
+This is a framework for building your own AI chief of staff using [Claude Code](https://claude.ai/download). It's not a product you install — it's a system you grow. The kit gives you:
+
+- **Guided workbooks** to teach your AI about you (your work patterns, team, priorities, tools)
+- **A workspace template** to organize your AI's knowledge and outputs
+- **Example skills** you can customize and run immediately
+- **Architecture patterns** that work regardless of which tools you use
+
+## What This Isn't
+
+This is **not** a copy of someone else's system with the names removed. Your AI chief of staff needs to understand YOUR work patterns, YOUR team dynamics, YOUR priorities. The workbooks in this kit help you discover and articulate those things — they don't prescribe answers.
+
+The example skills are starting points, not finished products. They'll be mediocre on the first run. That's by design. Each run teaches you what to refine.
+
+---
+
+## Prerequisites
+
+- **Claude Code** installed ([claude.ai/download](https://claude.ai/download))
+- **A calendar** you can connect (Google Calendar, Outlook, etc.)
+- **1-2 hours** for initial setup, then 15-30 minutes of refinement per week
+- **No coding experience required** — you're writing plain English prompts and organizing files
+
+### Optional but valuable:
+- A task manager with an MCP connector (OmniFocus, Todoist, Asana, etc.)
+- A notes app with an MCP connector (Evernote, Notion, Obsidian, etc.)
+- Slack or Teams access via MCP connector
+
+The system works with just a calendar. Each additional tool you connect makes it more useful, but none are required to start.
+
+---
+
+## What's in This Kit
+
+```
+├── README.md                    ← You are here
+├── start-here.md                ← Quick-start guide (build your first agent in 1 hour)
+├── CLAUDE-template.md           ← Workspace rules template
+├── architecture-patterns.md     ← The 3 ideas that make it work
+│
+├── me/                          ← Guided self-discovery workbooks
+│   ├── how-i-work.md            ← Your rhythms, habits, capture methods
+│   ├── my-team.md               ← Your people and relationships
+│   ├── my-priorities.md         ← What matters most right now
+│   └── my-tools.md              ← Your tool inventory + connections
+│
+└── skills/                      ← Skill architecture + examples
+    ├── README.md                ← How skills work
+    ├── example-meeting-prep/
+    │   └── SKILL.md             ← Your first skill — meeting prep
+    └── example-weekly-review/
+        └── SKILL.md             ← Your second skill — weekly review
+```
+
+---
+
+## Getting Started (Suggested Order)
+
+### Week 1: Foundation
+
+**Day 1 — Set up your workspace (30 min)**
+1. Create a workspace folder (e.g., `~/ai-workspace/`)
+2. Initialize git: `git init`
+3. Copy `CLAUDE-template.md` to your workspace root and rename to `CLAUDE.md`
+4. Fill in the placeholders (your name, workspace path)
+5. Create the folder structure: `me/`, `outputs/`, `reference/`, `_claude/`
+
+**Day 1-2 — Fill in your workbooks (60-90 min total)**
+Work through each file in `me/`, one at a time:
+1. Start with `how-i-work.md` — this is the foundation
+2. Then `my-team.md` — list your top 5 people
+3. Then `my-priorities.md` — your top 3 priorities
+4. Then `my-tools.md` — inventory what you use
+
+Don't try to be comprehensive. Answer what comes to mind. You'll refine over time.
+
+**Day 3-4 — Run your first skill**
+1. Copy `skills/example-meeting-prep/` to `.claude/skills/meeting-prep/` in your workspace
+2. Read through the SKILL.md and customize the meeting categories for your role
+3. Open Claude Code in your workspace and type `/meeting-prep`
+4. Evaluate the output. What's useful? What's wrong? What's missing?
+5. Refine the skill based on what you observe
+
+**Day 5 — First weekly review**
+1. Copy `skills/example-weekly-review/` to `.claude/skills/weekly-review/`
+2. Run `/weekly-review` on Friday afternoon
+3. Use it to update your `me/` files with what you learned this week
+
+### Week 2: Iterate
+
+- Run `/meeting-prep` daily. Notice what's improving and what's still off.
+- Add more detail to your `me/` files based on what the AI gets wrong.
+- Read `architecture-patterns.md` now that you have context for why each pattern matters.
+- Consider connecting a second tool (task manager or notes app).
+
+### Week 3+: Expand
+
+- Build a new skill for something you do repeatedly (action item capture, email triage, etc.)
+- Start thinking about the sub-agent pattern if your skills are getting slow.
+- Your `me/` files should be getting richer and more accurate with each weekly review.
+
+---
+
+## How Long Before It's Useful?
+
+| Milestone | Timeline |
+|-----------|----------|
+| First useful meeting prep | Day 3-4 |
+| System feels personalized | Week 2-3 |
+| You stop thinking of it as a tool and start thinking of it as a teammate | Week 3-4 |
+| You build a skill without following an example | Month 2 |
+| Someone asks "how do you do that?" | Month 2-3 |
+
+---
+
+## Key Principles
+
+**1. Start simple, iterate often.**
+Your first version of everything will be mediocre. That's fine. Run it, observe what's wrong, and fix one thing. Repeat. The people who get the most out of this iterate weekly, not monthly.
+
+**2. Honesty over aspiration.**
+Write your `me/` files about how you ACTUALLY work, not how you wish you worked. If you never do a proper weekly review, say so. If you walk into every meeting unprepared, say so. Your AI can't help you improve a system it doesn't understand.
+
+**3. Your system should be yours.**
+Don't copy someone else's priorities, meeting categories, or reflection questions. The examples in this kit show different patterns so you can see the range — pick what resonates with YOUR work, or write your own.
+
+**4. The `me/` files are the investment.**
+Everything else — skills, outputs, architecture — follows from how well your AI understands you. If your skills feel generic, the fix is usually in your `me/` files, not in the skill instructions.
+
+**5. Review and maintain.**
+The system degrades if you don't maintain it. Stale priorities make your AI focus on the wrong things. Outdated team info makes meeting prep useless. The weekly review skill exists specifically to keep everything fresh.
+
+---
+
+## Further Reading
+
+- **[start-here.md](start-here.md)** — The fastest path: build your first agent in about an hour
+- **[architecture-patterns.md](architecture-patterns.md)** — The 3 transferable ideas that make the system work
+- **[skills/README.md](skills/README.md)** — Deep dive on how to build and refine skills
+- **[Claude Code documentation](https://docs.anthropic.com)** — Official docs
+
+## Background
+
+This kit comes from a real system — an AI chief of staff built by a healthcare executive who was tired of walking into meetings cold, losing track of follow-ups, and spending more time reacting than thinking strategically. After months of iteration, the architectural patterns and self-discovery approach were extracted into this framework so others can build their own version.
+
+The real insight wasn't any single skill or tool integration — it was that **the AI gets dramatically better when you take the time to teach it how you actually work.** The `me/` workbooks exist because that introspection is both the hardest and most valuable part.
+
+## License
+
+MIT — use it however you want. If you build something cool with it, I'd love to hear about it.
