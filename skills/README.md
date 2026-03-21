@@ -91,7 +91,9 @@ Save the output to `outputs/meeting-preps/YYYY-MM-DD-meeting-prep.md`
 
 ## Building Your First Skill
 
-See the two example skills in this folder:
+**Recommended:** Use `/init-meeting-prep` or `/init-weekly-review` to set up your first skills through guided conversation. These walk you through customizing the example skills for your tools, meeting types, and preferences.
+
+**Manual approach:** See the two example skills in this folder:
 - `example-meeting-prep/SKILL.md` — A meeting prep skill (the most universally useful first skill)
 - `example-weekly-review/SKILL.md` — A weekly review skill (great second skill)
 

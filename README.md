@@ -2,8 +2,6 @@
 
 Build a personal AI system that knows how you work, preps your meetings, reviews your week, and gets smarter over time.
 
-> **Just want the quick version?** Read **[start-here.md](start-here.md)** — a one-page guide to building your first AI agent in about an hour.
-
 ---
 
 ## What This Is
@@ -39,11 +37,34 @@ The system works with just a calendar. Each additional tool you connect makes it
 
 ---
 
+## Quick Start with `/init`
+
+The fastest way to get started is the interactive setup wizard. Open Claude Code in your workspace and type:
+
+```
+/init
+```
+
+It will walk you through 5 questions, then generate your starter files automatically. Takes about 10 minutes.
+
+After `/init`, you can expand your system with:
+- `/init-team` — build your relationship map
+- `/init-priorities` — define your strategic focus
+- `/init-meeting-prep` — activate your first skill
+- `/init-weekly-review` — set up your weekly anchor habit
+
+Each one is a guided conversation that generates real files from your answers. Run `/init` anytime to see your progress and pick what to set up next.
+
+**Prefer to set things up manually?** Skip to [Getting Started](#getting-started-suggested-order) below — the workbooks in `me/` guide you through the same process at your own pace.
+
+---
+
 ## What's in This Kit
 
 ```
+starter-kit/
+│
 ├── README.md                    ← You are here
-├── start-here.md                ← Quick-start guide (build your first agent in 1 hour)
 ├── CLAUDE-template.md           ← Workspace rules template
 ├── architecture-patterns.md     ← The 3 ideas that make it work
 │
@@ -55,10 +76,20 @@ The system works with just a calendar. Each additional tool you connect makes it
 │
 └── skills/                      ← Skill architecture + examples
     ├── README.md                ← How skills work
-    ├── example-meeting-prep/
-    │   └── SKILL.md             ← Your first skill — meeting prep
-    └── example-weekly-review/
-        └── SKILL.md             ← Your second skill — weekly review
+    ├── init/                    ← Interactive setup wizard
+    │   └── SKILL.md
+    ├── init-team/               ← Build your relationship map
+    │   └── SKILL.md
+    ├── init-priorities/         ← Define your strategic focus
+    │   └── SKILL.md
+    ├── init-meeting-prep/       ← Activate meeting prep skill
+    │   └── SKILL.md
+    ├── init-weekly-review/      ← Activate weekly review skill
+    │   └── SKILL.md
+    ├── example-meeting-prep/    ← Meeting prep reference template
+    │   └── SKILL.md
+    └── example-weekly-review/   ← Weekly review reference template
+        └── SKILL.md
 ```
 
 ---
@@ -143,17 +174,6 @@ The system degrades if you don't maintain it. Stale priorities make your AI focu
 
 ## Further Reading
 
-- **[start-here.md](start-here.md)** — The fastest path: build your first agent in about an hour
-- **[architecture-patterns.md](architecture-patterns.md)** — The 3 transferable ideas that make the system work
-- **[skills/README.md](skills/README.md)** — Deep dive on how to build and refine skills
-- **[Claude Code documentation](https://docs.anthropic.com)** — Official docs
-
-## Background
-
-This kit comes from a real system — an AI chief of staff built by a healthcare executive who was tired of walking into meetings cold, losing track of follow-ups, and spending more time reacting than thinking strategically. After months of iteration, the architectural patterns and self-discovery approach were extracted into this framework so others can build their own version.
-
-The real insight wasn't any single skill or tool integration — it was that **the AI gets dramatically better when you take the time to teach it how you actually work.** The `me/` workbooks exist because that introspection is both the hardest and most valuable part.
-
-## License
-
-MIT — use it however you want. If you build something cool with it, I'd love to hear about it.
+- **`architecture-patterns.md`** — The 3 transferable ideas that make the system work
+- **`skills/README.md`** — Deep dive on how to build and refine skills
+- **Claude Code documentation** — [docs.anthropic.com](https://docs.anthropic.com)
