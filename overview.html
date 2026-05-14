@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Chief of Staff — System Overview</title>
+<style>
+  :root {
+    --ink: #1a1a2e;
+    --slate: #4a4a6a;
+    --mist: #6c6c8a;
+    --cloud: #f0f0f5;
+    --white: #ffffff;
+    --accent: #4f46e5;
+    --accent-light: #818cf8;
+    --accent-bg: #eef2ff;
+    --warm: #f59e0b;
+    --warm-bg: #fffbeb;
+    --green: #10b981;
+    --green-bg: #ecfdf5;
+    --rose: #f43f5e;
+    --rose-bg: #fff1f2;
+    --blue: #3b82f6;
+    --blue-bg: #eff6ff;
+    --purple: #8b5cf6;
+    --purple-bg: #f5f3ff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+    color: var(--ink);
+    line-height: 1.6;
+    background: var(--white);
+  }
+
+  .container { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+
+  /* ── Hero ── */
+  .hero {
+    background: linear-gradient(135deg, #1a1a2e 0%, #2d2b55 50%, #4f46e5 100%);
+    color: white;
+    padding: 80px 0 60px;
+    text-align: center;
+  }
+  .hero h1 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+  }
+  .hero .subtitle {
+    font-size: 1.25rem;
+    opacity: 0.85;
+    max-width: 620px;
+    margin: 0 auto 32px;
+    line-height: 1.5;
+  }
+  .hero .author {
+    font-size: 0.95rem;
+    opacity: 0.7;
+  }
+  .hero .author a { color: var(--accent-light); text-decoration: none; }
+  .hero .author a:hover { text-decoration: underline; }
+
+  /* ── Section ── */
+  section { padding: 64px 0; }
+  section + section { border-top: 1px solid var(--cloud); }
+  h2 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    letter-spacing: -0.01em;
+  }
+  .section-intro {
+    color: var(--slate);
+    font-size: 1.05rem;
+    max-width: 700px;
+    margin-bottom: 36px;
+    line-height: 1.65;
+  }
+
+  /* ── Concept Grid ── */
+  .concept-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+    margin-bottom: 40px;
+  }
+  .concept-card {
+    background: var(--cloud);
+    border-radius: 12px;
+    padding: 28px 24px;
+  }
+  .concept-card .icon {
+    font-size: 1.8rem;
+    margin-bottom: 12px;
+    display: block;
+  }
+  .concept-card h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .concept-card p {
+    color: var(--slate);
+    font-size: 0.92rem;
+    line-height: 1.55;
+  }
+
+  /* ── Architecture Diagram ── */
+  .arch-diagram {
+    background: var(--cloud);
+    border-radius: 16px;
+    padding: 40px 32px;
+    margin: 32px 0;
+  }
+  .arch-row {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 16px;
+    align-items: stretch;
+  }
+  .arch-row:last-child { margin-bottom: 0; }
+
+  .arch-box {
+    flex: 1;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+  }
+  .arch-box h4 {
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 6px;
+  }
+  .arch-box p {
+    font-size: 0.82rem;
+    line-height: 1.4;
+  }
+  .arch-box.engine { background: var(--accent-bg); color: var(--accent); }
+  .arch-box.engine p { color: var(--slate); }
+  .arch-box.data { background: var(--green-bg); color: var(--green); }
+  .arch-box.data p { color: var(--slate); }
+  .arch-box.output { background: var(--warm-bg); color: #b45309; }
+  .arch-box.output p { color: var(--slate); }
+  .arch-box.tools { background: var(--purple-bg); color: var(--purple); }
+  .arch-box.tools p { color: var(--slate); }
+
+  .arch-arrow {
+    text-align: center;
+    color: var(--mist);
+    font-size: 1.2rem;
+    margin: 8px 0;
+  }
+
+  /* ── Domain Cards ── */
+  .domain-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+    gap: 24px;
+  }
+  .domain-card {
+    border: 1px solid #e5e5ef;
+    border-radius: 12px;
+    padding: 28px;
+    transition: box-shadow 0.2s;
+  }
+  .domain-card:hover {
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+  }
+  .domain-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .domain-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+  }
+  .domain-card h3 {
+    font-size: 1.05rem;
+    font-weight: 600;
+  }
+  .domain-card ul {
+    list-style: none;
+    padding: 0;
+  }
+  .domain-card li {
+    font-size: 0.9rem;
+    color: var(--slate);
+    padding: 5px 0;
+    padding-left: 18px;
+    position: relative;
+    line-height: 1.5;
+  }
+  .domain-card li::before {
+    content: '›';
+    position: absolute;
+    left: 0;
+    color: var(--mist);
+    font-weight: 600;
+  }
+  .domain-card li strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  .di-daily { background: var(--accent-bg); color: var(--accent); }
+  .di-intel { background: var(--rose-bg); color: var(--rose); }
+  .di-delegate { background: var(--warm-bg); color: #b45309; }
+  .di-builder { background: var(--green-bg); color: var(--green); }
+  .di-content { background: var(--purple-bg); color: var(--purple); }
+  .di-coaching { background: var(--blue-bg); color: var(--blue); }
+
+  /* ── Tools Strip ── */
+  .tools-strip {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+  }
+  .tool-badge {
+    background: var(--cloud);
+    border-radius: 20px;
+    padding: 8px 18px;
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--slate);
+    white-space: nowrap;
+  }
+
+  /* ── Rhythm Timeline ── */
+  .rhythm-timeline {
+    position: relative;
+    padding-left: 32px;
+  }
+  .rhythm-timeline::before {
+    content: '';
+    position: absolute;
+    left: 11px;
+    top: 8px;
+    bottom: 8px;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--accent), var(--green), var(--warm));
+    border-radius: 2px;
+  }
+  .rhythm-item {
+    position: relative;
+    margin-bottom: 28px;
+  }
+  .rhythm-item:last-child { margin-bottom: 0; }
+  .rhythm-item::before {
+    content: '';
+    position: absolute;
+    left: -25px;
+    top: 6px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 2px solid var(--white);
+    box-shadow: 0 0 0 2px var(--accent);
+  }
+  .rhythm-item:nth-child(2)::before,
+  .rhythm-item:nth-child(3)::before { background: var(--blue); box-shadow: 0 0 0 2px var(--blue); }
+  .rhythm-item:nth-child(4)::before,
+  .rhythm-item:nth-child(5)::before { background: var(--green); box-shadow: 0 0 0 2px var(--green); }
+  .rhythm-item:nth-child(6)::before { background: var(--warm); box-shadow: 0 0 0 2px var(--warm); }
+  .rhythm-time {
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--mist);
+    margin-bottom: 2px;
+  }
+  .rhythm-item h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .rhythm-item p {
+    font-size: 0.9rem;
+    color: var(--slate);
+    line-height: 1.55;
+  }
+
+  /* ── Screenshots / See It In Action ── */
+  .screenshot-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+    margin-top: 32px;
+  }
+  .screenshot-card {
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #e5e5ef;
+    transition: box-shadow 0.2s;
+  }
+  .screenshot-card:hover {
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  }
+  .screenshot-img {
+    width: 100%;
+    background: var(--cloud);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--mist);
+    font-size: 0.85rem;
+    font-style: italic;
+    border-bottom: 1px solid #e5e5ef;
+    overflow: hidden;
+  }
+  .screenshot-img img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .screenshot-caption {
+    padding: 12px 12px;
+    font-size: 0.82rem;
+    color: var(--slate);
+    line-height: 1.4;
+  }
+  .screenshot-caption strong {
+    color: var(--ink);
+    display: block;
+    margin-bottom: 2px;
+    font-size: 0.85rem;
+  }
+
+  /* ── Article Cards ── */
+  .article-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 32px;
+  }
+  .article-card {
+    border: 1px solid #e5e5ef;
+    border-radius: 12px;
+    padding: 24px;
+    text-decoration: none;
+    color: inherit;
+    transition: box-shadow 0.2s, transform 0.15s;
+    display: flex;
+    flex-direction: column;
+  }
+  .article-card:hover {
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    transform: translateY(-2px);
+  }
+  .article-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 8px;
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 4px;
+    width: fit-content;
+  }
+  .label-article { background: var(--accent-bg); color: var(--accent); }
+  .label-video { background: var(--rose-bg); color: var(--rose); }
+  .article-card h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    line-height: 1.35;
+  }
+  .article-card p {
+    font-size: 0.88rem;
+    color: var(--slate);
+    line-height: 1.5;
+    flex-grow: 1;
+  }
+  .article-card .read-link {
+    margin-top: 12px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--accent);
+  }
+
+  /* ── Best Practices ── */
+  .practices-list {
+    counter-reset: practice;
+    max-width: 720px;
+  }
+  .practice-item {
+    counter-increment: practice;
+    position: relative;
+    padding: 24px 0 24px 60px;
+    border-bottom: 1px solid var(--cloud);
+  }
+  .practice-item:last-child { border-bottom: none; }
+  .practice-item::before {
+    content: counter(practice);
+    position: absolute;
+    left: 0;
+    top: 24px;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: var(--accent-bg);
+    color: var(--accent);
+    font-size: 1.1rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .practice-item h3 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .practice-item p {
+    font-size: 0.92rem;
+    color: var(--slate);
+    line-height: 1.6;
+  }
+
+  /* ── Blockquote ── */
+  .pullquote {
+    border-left: 3px solid var(--accent);
+    padding: 16px 24px;
+    margin: 32px 0;
+    background: var(--accent-bg);
+    border-radius: 0 8px 8px 0;
+    font-size: 1.05rem;
+    font-style: italic;
+    color: var(--slate);
+    max-width: 720px;
+    line-height: 1.6;
+  }
+
+  /* ── CTA ── */
+  .cta {
+    background: linear-gradient(135deg, #1a1a2e, #4f46e5);
+    color: white;
+    padding: 56px 0;
+    text-align: center;
+    border-radius: 0;
+  }
+  .cta h2 { color: white; margin-bottom: 16px; }
+  .cta p {
+    opacity: 0.85;
+    max-width: 520px;
+    margin: 0 auto 28px;
+    line-height: 1.6;
+  }
+  .cta-btn {
+    display: inline-block;
+    background: white;
+    color: var(--accent);
+    font-weight: 600;
+    padding: 14px 32px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .cta-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+  }
+
+  /* ── Footer ── */
+  footer {
+    padding: 32px 0;
+    text-align: center;
+    color: var(--mist);
+    font-size: 0.85rem;
+  }
+  footer a { color: var(--accent); text-decoration: none; }
+
+  /* ── Responsive ── */
+  @media (max-width: 900px) {
+    .screenshot-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  @media (max-width: 640px) {
+    .hero h1 { font-size: 2rem; }
+    .hero { padding: 48px 0 40px; }
+    .arch-row { flex-direction: column; }
+    .concept-grid, .domain-grid, .article-grid {
+      grid-template-columns: 1fr;
+    }
+    .screenshot-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════ HERO ══════════ -->
+<header class="hero">
+  <div class="container">
+    <h1>AI Chief of Staff</h1>
+    <p class="subtitle">
+      60+ AI workflows, unified into an executive operating system.
+      Connected to every tool I already use — calendar, email, chat, tasks, docs, and more.
+    </p>
+    <p class="author">
+      By <a href="https://www.linkedin.com/in/aneinstein/">Aaron Neinstein</a>
+    </p>
+  </div>
+</header>
+
+<!-- ══════════ WHAT IT IS ══════════ -->
+<section>
+  <div class="container">
+    <h2>What is this?</h2>
+    <p class="section-intro">
+      The AI Chief of Staff is a system of AI agents that work together as an executive operating system —
+      preparing me for meetings, tracking who owes what to whom, scanning for emerging issues across the company,
+      managing content and publishing, and synthesizing everything into a daily operating rhythm.
+      It doesn't replace thinking. It removes the friction so I can focus on what actually matters.
+    </p>
+
+    <div class="concept-grid">
+      <div class="concept-card">
+        <span class="icon">🧠</span>
+        <h3>Knowledge Layer</h3>
+        <p>A set of structured files that teach the AI who I am, how I work, my team, my priorities, and the tools I use. This is the foundation — when I update my quarterly priorities, every agent in the system immediately shifts its behavior without being individually retrained.</p>
+      </div>
+      <div class="concept-card">
+        <span class="icon">⚡</span>
+        <h3>Skills (Workflows)</h3>
+        <p>Reusable workflows I trigger with a single command — each one solves a specific recurring problem like meeting prep, daily briefing, weekly review, delegation tracking, or content editing. Think of them like macros, but intelligent.</p>
+      </div>
+      <div class="concept-card">
+        <span class="icon">🔌</span>
+        <h3>Connectors</h3>
+        <p>Direct integrations that let the AI read and write to my existing tools — calendar, Slack, task manager, wiki, email, and more. No copy-pasting, no switching tabs. The AI goes to the source.</p>
+      </div>
+      <div class="concept-card">
+        <span class="icon">🔄</span>
+        <h3>Operating Rhythm</h3>
+        <p>Daily and weekly rituals that compound over time. A voice memo I record in the evening feeds the next morning's briefing, which feeds meeting prep, which feeds an end-of-day action sweep, which feeds the next day. Each step makes the next one smarter.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ SEE IT IN ACTION ══════════ -->
+<section>
+  <div class="container">
+    <h2>See It In Action</h2>
+    <p class="section-intro">
+      Here's what the system actually looks like when I use it day-to-day. These are real outputs from my live system.
+    </p>
+
+    <div class="screenshot-grid">
+      <div class="screenshot-card">
+        <div class="screenshot-img">
+          <img src="img/sidebar-overview.jpg" alt="The AI Chief of Staff system sidebar showing all workflow categories">
+        </div>
+        <div class="screenshot-caption">
+          <strong>The System</strong>
+          All workflows organized under one roof — from voice memos and briefings to meeting prep, coaching, and radar.
+        </div>
+      </div>
+
+      <div class="screenshot-card">
+        <div class="screenshot-img">
+          <img src="img/daily-briefing.jpg" alt="Daily briefing showing prioritized focus tasks for the day">
+        </div>
+        <div class="screenshot-caption">
+          <strong>Daily Briefing</strong>
+          Top priorities for the day, pulled from my task manager and linked to my Top 10 weekly goals.
+        </div>
+      </div>
+
+      <div class="screenshot-card">
+        <div class="screenshot-img">
+          <img src="img/meeting-prep.jpg" alt="Meeting prep document with top topics and discussion questions">
+        </div>
+        <div class="screenshot-caption">
+          <strong>Meeting Prep</strong>
+          Before each meeting — key topics, context, and the specific questions to ask. Generated automatically.
+        </div>
+      </div>
+
+      <div class="screenshot-card">
+        <div class="screenshot-img">
+          <img src="img/action-sweep.jpg" alt="End-of-day meeting digest showing action items extracted from transcripts">
+        </div>
+        <div class="screenshot-caption">
+          <strong>Action Sweep</strong>
+          End-of-day digest: 7 meetings scanned, 8 action items mine, 14 delegated, 4 decisions captured.
+        </div>
+      </div>
+
+      <div class="screenshot-card">
+        <div class="screenshot-img">
+          <img src="img/industry-radar.jpg" alt="Industry radar analysis of healthcare AI governance signals">
+        </div>
+        <div class="screenshot-caption">
+          <strong>Industry Radar</strong>
+          Daily scan of newsletters and articles, with analysis of why each item matters to my work.
+        </div>
+      </div>
+    </div>
+
+    <!-- Video embed placeholder -->
+    <div style="margin-top: 40px; text-align: center;">
+      <p style="color: var(--slate); margin-bottom: 16px; font-size: 1rem;">Watch a 5-minute walkthrough of the live system:</p>
+      <a href="https://www.linkedin.com/posts/aaronneinstein_several-weeks-ago-i-published-an-article-ugcPost-7455089750731825152-27A6" target="_blank" rel="noopener" style="display: inline-block; background: var(--accent); color: white; font-weight: 600; padding: 14px 28px; border-radius: 8px; text-decoration: none; font-size: 0.95rem; transition: transform 0.15s, box-shadow 0.15s;" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 4px 16px rgba(79,70,229,0.3)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+        ▶ Watch the Demo on LinkedIn
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ ARCHITECTURE ══════════ -->
+<section>
+  <div class="container">
+    <h2>How It Works</h2>
+    <p class="section-intro">
+      Four layers working in a loop: my existing tools feed data into the AI engine, the engine draws on a knowledge layer I've built about how I work, and it produces outputs that flow back into the tools I already use. The loop gets smarter over time.
+    </p>
+
+    <div class="arch-diagram">
+      <div class="arch-row">
+        <div class="arch-box tools">
+          <h4>My Existing Tools</h4>
+          <p>Calendar · Slack · Task Manager · Wiki/Docs · Email · RSS Reader · Cloud Storage · Notes</p>
+        </div>
+      </div>
+
+      <div class="arch-arrow">▼ Direct Integrations ▼</div>
+
+      <div class="arch-row">
+        <div class="arch-box engine">
+          <h4>AI Engine + 60+ Workflows</h4>
+          <p>Meeting prep · Daily briefing · Delegation tracking · Company radar · Industry scan · Content editing · Coaching</p>
+        </div>
+      </div>
+
+      <div class="arch-arrow">▼ Reads & Writes ▼</div>
+
+      <div class="arch-row">
+        <div class="arch-box data">
+          <h4>Knowledge Layer</h4>
+          <p>Who I am · How I work · My team · My priorities · My tools · Voice memos · Weekly reflections</p>
+        </div>
+      </div>
+
+      <div class="arch-arrow">▼ Produces ▼</div>
+
+      <div class="arch-row">
+        <div class="arch-box output">
+          <h4>Outputs</h4>
+          <p>Meeting preps · Briefings · Action items · Delegation nudges · Content drafts · Intelligence reports · Tasks</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ SKILL DOMAINS ══════════ -->
+<section>
+  <div class="container">
+    <h2>What It Does</h2>
+    <p class="section-intro">
+      The system is organized into six functional domains. Each workflow pulls live data from connected tools, applies everything the system knows about me and my priorities, and produces a ready-to-use output.
+    </p>
+
+    <div class="domain-grid">
+      <div class="domain-card">
+        <div class="domain-header">
+          <div class="domain-icon di-daily">☀️</div>
+          <h3>Daily Operations</h3>
+        </div>
+        <ul>
+          <li><strong>Morning briefing</strong> — reads my calendar, top priorities, overnight Slack messages, and last night's voice memo to produce a one-page day plan before I start work</li>
+          <li><strong>Meeting prep</strong> — before each meeting, gathers shared notes, recent decisions, open threads, and team context. Auto-detects whether it's a coaching 1:1 or a coordination meeting and adjusts the format accordingly</li>
+          <li><strong>End-of-day action sweep</strong> — reads through every meeting transcript from the day and extracts the commitments I made, turning them into tasks so nothing falls through the cracks</li>
+          <li><strong>Friday close-out</strong> — guided weekly reflection with a wins inventory, priority review, and Top 10 planning for the following week. Feeds Monday's orientation briefing</li>
+        </ul>
+      </div>
+
+      <div class="domain-card">
+        <div class="domain-header">
+          <div class="domain-icon di-intel">📡</div>
+          <h3>Intelligence & Radar</h3>
+        </div>
+        <ul>
+          <li><strong>Company radar</strong> — scans internal chat threads, call recordings, and team documents to surface conversations where my input is needed, wins I should amplify, or problems emerging before they escalate</li>
+          <li><strong>Industry radar</strong> — daily scan across newsletters, RSS feeds, and saved articles to surface the 3-5 things most relevant to my work, with weekly synthesis of themes and patterns</li>
+          <li><strong>Proactive alerts</strong> — the system runs on a schedule throughout the day, so emerging issues surface to me even when I'm not actively looking for them</li>
+        </ul>
+      </div>
+
+      <div class="domain-card">
+        <div class="domain-header">
+          <div class="domain-icon di-delegate">📋</div>
+          <h3>Delegation & Follow-Up</h3>
+        </div>
+        <ul>
+          <li><strong>Delegation nudges</strong> — tracks items I've handed off to others and surfaces the ones that have gone quiet, so I can follow up before they stall. This is the work no one has time to do manually but everyone needs</li>
+          <li><strong>EA coordination brief</strong> — weekly summary for my executive assistant with priorities, scheduling preferences, and outstanding logistics</li>
+          <li><strong>Cross-team commitment tracking</strong> — identifies promises made across teams in meetings and tracks their progress, closing the loop on the invisible work that often falls between the cracks</li>
+        </ul>
+      </div>
+
+      <div class="domain-card">
+        <div class="domain-header">
+          <div class="domain-icon di-builder">📊</div>
+          <h3>Business Intelligence</h3>
+        </div>
+        <ul>
+          <li><strong>Weekly executive report</strong> — pulls together metrics, risks, decisions, and learnings into a structured update for leadership. What used to take 2+ hours of manual assembly now takes minutes</li>
+          <li><strong>North star metrics dashboard</strong> — automated quantitative tracking across the full funnel — engagement, activation, and adoption metrics updated on a regular cadence</li>
+          <li><strong>Team enablement tracking</strong> — per-person progress tracking for onboarding, training, and skill development programs</li>
+          <li><strong>Community pulse</strong> — measures engagement patterns across community channels to identify who's active, who's gone quiet, and what topics are trending</li>
+        </ul>
+      </div>
+
+      <div class="domain-card">
+        <div class="domain-header">
+          <div class="domain-icon di-content">✍️</div>
+          <h3>Content & Thought Leadership</h3>
+        </div>
+        <ul>
+          <li><strong>Editing and refinement</strong> — I write the raw ideas and drafts; the system edits and refines them using a detailed voice guide and archive of my past writing, so the output sounds like me. It's an editor, not a ghostwriter</li>
+          <li><strong>Social engagement</strong> — surfaces relevant posts and conversations in my network so I can find the right threads to engage with, rather than scrolling for an hour looking for them</li>
+          <li><strong>Idea pipeline</strong> — captures raw ideas from voice memos and conversations, organizes them by theme, and develops them through multiple drafts into publishable content</li>
+          <li><strong>Content analytics</strong> — tracks what's performing, what's resonating, and what topics to lean into, refreshed on a weekly cadence</li>
+        </ul>
+      </div>
+
+      <div class="domain-card">
+        <div class="domain-header">
+          <div class="domain-icon di-coaching">🧭</div>
+          <h3>Coaching & Reflection</h3>
+        </div>
+        <ul>
+          <li><strong>Executive coaching</strong> — on-demand counsel for work decisions, staffing questions, strategic tradeoffs, and interpersonal dynamics. Available any time without scheduling a session</li>
+          <li><strong>Interaction feedback</strong> — reviews my meeting transcripts and gives me honest feedback on how I showed up — did I listen enough, did I dominate, did I miss a signal from someone on the team. The kind of feedback you rarely get as a leader</li>
+          <li><strong>Strategic provocateur</strong> — deliberately challenges my assumptions and says the things no one on my team will. "What are you avoiding?" is its favorite question</li>
+          <li><strong>Behavioral pattern observations</strong> — weekly analysis of how I'm spending my time and energy versus my stated priorities. Surfaces misalignments I wouldn't notice on my own</li>
+          <li><strong>Voice memo processing</strong> — turns daily 5-minute voice recordings into structured notes, extracting themes and observations that feed back into the knowledge layer</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ DAILY RHYTHM ══════════ -->
+<section>
+  <div class="container">
+    <h2>A Day in the System</h2>
+    <p class="section-intro">
+      The individual workflows are useful on their own, but the real leverage is the rhythm.
+      Each step feeds the next, creating a compounding loop where every day makes the system smarter.
+    </p>
+
+    <div class="rhythm-timeline">
+      <div class="rhythm-item">
+        <div class="rhythm-time">Early Morning</div>
+        <h4>Daily Briefing</h4>
+        <p>Reads last night's voice memo, pulls today's calendar, checks my top priorities, and scans Slack for overnight signals. Outputs a one-page day plan I read over coffee.</p>
+      </div>
+      <div class="rhythm-item">
+        <div class="rhythm-time">Before Meetings</div>
+        <h4>Meeting Prep</h4>
+        <p>Gathers shared notes, recent decisions, open threads, and team context. Detects whether it's a coaching 1:1 or a coordination meeting and adjusts accordingly. I walk into every meeting prepared.</p>
+      </div>
+      <div class="rhythm-item">
+        <div class="rhythm-time">Between Meetings</div>
+        <h4>Radar Scans</h4>
+        <p>Company radar surfaces internal conversations where my input is needed. Industry radar scans my reading list for relevant news. Both run on a schedule so I don't have to remember to check.</p>
+      </div>
+      <div class="rhythm-item">
+        <div class="rhythm-time">End of Day</div>
+        <h4>Action Sweep</h4>
+        <p>Reads through every meeting transcript from the day and extracts commitments I made. Creates tasks automatically so nothing falls through the cracks.</p>
+      </div>
+      <div class="rhythm-item">
+        <div class="rhythm-time">Evening</div>
+        <h4>Voice Memo</h4>
+        <p>I record a 5-minute voice memo reflecting on the day — what happened, what I'm thinking about, what needs attention. The system transcribes and structures it for tomorrow's briefing.</p>
+      </div>
+      <div class="rhythm-item">
+        <div class="rhythm-time">Friday</div>
+        <h4>Weekly Close-Out</h4>
+        <p>Guided reflection, wins inventory, and Top 10 priority planning for next week. This feeds Monday's weekly orientation, closing the loop.</p>
+      </div>
+    </div>
+
+    <div class="pullquote">
+      "No single agent delivers that value chain. The weekly rhythm does. And the knowledge compounds — an agent that's run dozens of times, drawing on months of voice memos and reflections, operates on a fundamentally different level."
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ CONNECTED TOOLS ══════════ -->
+<section>
+  <div class="container">
+    <h2>Connected Tools</h2>
+    <p class="section-intro">
+      The system plugs directly into the tools I already use every day. No new apps to learn — just an intelligent layer on top of the workflow I already have.
+    </p>
+    <div class="tools-strip">
+      <span class="tool-badge">📅 Google Calendar</span>
+      <span class="tool-badge">💬 Slack</span>
+      <span class="tool-badge">✅ OmniFocus (task manager)</span>
+      <span class="tool-badge">📝 Confluence (wiki/docs)</span>
+      <span class="tool-badge">📧 Gmail</span>
+      <span class="tool-badge">📖 Readwise Reader (RSS & reading list)</span>
+      <span class="tool-badge">📁 Google Drive</span>
+      <span class="tool-badge">🗂️ Obsidian (notes)</span>
+      <span class="tool-badge">🔍 Glean (enterprise search)</span>
+      <span class="tool-badge">📊 Asana (project tracker)</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ BEST PRACTICES ══════════ -->
+<section>
+  <div class="container">
+    <h2>How to Get Started</h2>
+    <p class="section-intro">
+      Building an AI Chief of Staff is less about technical skill and more about
+      knowing where to start and being willing to iterate. Here's what I've learned after months of doing this.
+    </p>
+
+    <div class="practices-list">
+      <div class="practice-item">
+        <h3>Start capturing a daily voice memo</h3>
+        <p>This will feel weird at first. Just do it. Record your thoughts every day for two weeks — on your phone, while driving, wherever. Use your phone's native transcription. Don't worry about quality, just capture. Then feed those memos to an AI and ask it to find insights and patterns. You'll be shocked how much useful information you surface. This raw thinking becomes the highest-value input in the entire system.</p>
+      </div>
+
+      <div class="practice-item">
+        <h3>Document what "good" looks like — for you</h3>
+        <p>Before your AI can work to your specifications, you have to write down what your specifications are. How do you like your day structured? What does a good 1:1 look like? What are your priorities this quarter? What's your communication style? The more you document, the less you have to explain, and the more every agent benefits from the same foundation. This doesn't have to be perfect — just start. <strong>Practical tip:</strong> these files are all plain-text Markdown (.md), which can look intimidating if you're not a developer. Download <a href="https://obsidian.md" style="color: var(--accent);">Obsidian</a> (free) — it turns a folder of Markdown files into something that feels like a polished notes app, with formatting, linking, and search. It's what I use every day.</p>
+      </div>
+
+      <div class="practice-item">
+        <h3>Pick one workflow that annoys you the most</h3>
+        <p>Not the most complex one. The one that's the biggest recurring headache. Your 1:1 prep. Your weekly status email. Your meeting prep. Build one agent that handles it. Use it for a month. Iterate until the output is 95% right — don't settle for 70% and manually fix it every time. Then build the next one. If you're not emotionally invested in the problem, you won't put in the work to get the agent past "interesting."</p>
+      </div>
+
+      <div class="practice-item">
+        <h3>Think in recurring jobs, not one-off tasks</h3>
+        <p>The agents that create leverage map to recurring jobs you struggle to do well — not because they're hard, but because they're fragmented, repetitive, or cognitively expensive. Ask yourself: Where would you hire 100 more people if you could? What would you have an intern do? What high-leverage work happens inconsistently because no one has time? Those are the agents worth building.</p>
+      </div>
+
+      <div class="practice-item">
+        <h3>Think about what compounds</h3>
+        <p>The real power isn't any individual agent — it's the knowledge layer that builds over time. Every voice memo, every reflection, every decision you capture makes every future agent more capable. An agent that runs once has no memory. An agent that's run dozens of times, drawing on months of reflections and memos, operates on a fundamentally different level. Start now, because the biggest advantage is the months of compounding knowledge.</p>
+      </div>
+    </div>
+
+    <div class="pullquote">
+      "The work is rapidly moving from doing the thing to documenting what good looks like, so that AI can do the thing to your specifications."
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ READ & WATCH ══════════ -->
+<section>
+  <div class="container">
+    <h2>Read & Watch</h2>
+    <p class="section-intro">
+      I've written extensively about the system, the lessons learned, and the principles behind it.
+    </p>
+
+    <div class="article-grid">
+      <a class="article-card" href="https://www.linkedin.com/pulse/i-built-myself-ai-chief-staff-heres-what-looks-like-aaron-neinstein-keohc" target="_blank" rel="noopener">
+        <span class="article-label label-article">Article</span>
+        <h3>I Built Myself an AI Chief of Staff. Here's What It Looks Like.</h3>
+        <p>The flagship walkthrough — from individual agents into a unified executive operating system. Covers the five-question framework, the knowledge layer, the weekly rhythm, and how compound intelligence works.</p>
+        <span class="read-link">Read on LinkedIn →</span>
+      </a>
+
+      <a class="article-card" href="https://www.linkedin.com/pulse/what-weve-learned-building-ai-agents-ourselves-aaron-neinstein-lxfkc" target="_blank" rel="noopener">
+        <span class="article-label label-article">Article — Part 1</span>
+        <h3>What I've Learned Building AI Agents for My Own Day-to-Day Use</h3>
+        <p>The five categories of agents that consistently deliver value: preparation, follow-through, synthesis over time, turning raw thinking into leverage, and work you'd never do manually at scale.</p>
+        <span class="read-link">Read on LinkedIn →</span>
+      </a>
+
+      <a class="article-card" href="https://www.linkedin.com/pulse/how-i-think-building-ai-agents-actually-get-used-aaron-neinstein-hrgbc" target="_blank" rel="noopener">
+        <span class="article-label label-article">Article — Part 2</span>
+        <h3>How I Think About Building AI Agents That Actually Get Used</h3>
+        <p>Eight hard-won lessons: pick problems that matter, clarity beats clever prompts, don't settle for 70% good, context is everything, use AI to improve your AI, and revisit failed experiments.</p>
+        <span class="read-link">Read on LinkedIn →</span>
+      </a>
+
+      <a class="article-card" href="https://www.linkedin.com/posts/aaronneinstein_have-talked-to-a-lot-of-people-recently-who-activity-7442238969162915840-TGBu" target="_blank" rel="noopener">
+        <span class="article-label label-article">Post</span>
+        <h3>Where to Begin Without Feeling Overwhelmed</h3>
+        <p>For non-technical professionals who feel behind on AI adoption. Four practical steps to get started — the gap isn't capability, it's knowing where to begin.</p>
+        <span class="read-link">Read on LinkedIn →</span>
+      </a>
+
+      <a class="article-card" href="https://www.linkedin.com/posts/aaronneinstein_several-weeks-ago-i-published-an-article-ugcPost-7455089750731825152-27A6" target="_blank" rel="noopener">
+        <span class="article-label label-video">Video · 5 min</span>
+        <h3>My Actual AI Chief of Staff System — Live Walkthrough</h3>
+        <p>An unscripted 5-minute screen recording of the live system in action: pulling up a daily briefing, running meeting prep, voice memo processing, end-of-day action sweep, and industry radar scan.</p>
+        <span class="read-link">Watch on LinkedIn →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ CTA ══════════ -->
+<section class="cta">
+  <div class="container">
+    <h2>Build Your Own</h2>
+    <p>
+      The starter kit includes guided workbooks, a workspace template, example workflows,
+      and a 3-week onboarding plan. You'll need Claude Code and about two hours to get the foundation set up.
+    </p>
+    <a href="https://github.com/aneinstein/ai-chief-of-staff-starter-kit" class="cta-btn">
+      Get the Starter Kit →
+    </a>
+  </div>
+</section>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer>
+  <div class="container">
+    <p>
+      Built by <a href="https://www.linkedin.com/in/aneinstein/">Aaron Neinstein</a> ·
+      <a href="https://github.com/aneinstein/ai-chief-of-staff-starter-kit">GitHub</a> ·
+      Powered by <a href="https://claude.ai/code">Claude Code</a>
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>
