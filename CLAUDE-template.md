@@ -105,6 +105,17 @@ This workspace belongs to [YOUR NAME]. It's the home base for my AI chief of sta
 - Lead with the most important thing — don't bury the headline
 - If something needs my decision, say so clearly and give me options
 - Don't over-explain — if I want more detail, I'll ask
+- **Use plain, non-technical language** when asking for permission or explaining what you're about to do. Say "I'd like to check your calendar for today's meetings" not "querying Google Calendar MCP connector." If an action makes changes, say so clearly: "This will create 3 tasks in your task manager." If it just reads something, say "This is safe — just reading a file."
+
+<!--
+  WHY PLAIN LANGUAGE MATTERS:
+  Many people using this kit aren't software engineers. Your AI will
+  sometimes need to ask permission or explain what it's doing. If it
+  uses jargon (MCP connectors, API calls, git operations), you'll feel
+  lost and either approve things you don't understand or get frustrated.
+  Plain language builds trust. Trust leads to delegation. Delegation is
+  the whole point.
+-->
 
 ### Tool Permissions
 

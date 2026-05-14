@@ -27,6 +27,7 @@ The example skills are starting points, not finished products. They'll be medioc
 - **A calendar** you can connect (Google Calendar, Outlook, etc.)
 - **1-2 hours** for initial setup, then 15-30 minutes of refinement per week
 - **No coding experience required** — you're writing plain English prompts and organizing files
+- **A markdown editor** — [Obsidian](https://obsidian.md) (free) is recommended. It makes reading and editing `.md` files feel like using a notes app instead of wrestling with code. You can also use any text editor.
 
 ### Optional but valuable:
 - A task manager with an MCP connector (OmniFocus, Todoist, Asana, etc.)
@@ -158,22 +159,37 @@ Don't try to be comprehensive. Answer what comes to mind. You'll refine over tim
 **1. Start simple, iterate often.**
 Your first version of everything will be mediocre. That's fine. Run it, observe what's wrong, and fix one thing. Repeat. The people who get the most out of this iterate weekly, not monthly.
 
-**2. Honesty over aspiration.**
+**2. 70% good is a trap.**
+A skill that's 70% right feels impressive at first but creates trust debt. You'll start second-guessing every output, and eventually stop using it. Push each skill to 90%+ before building the next one. One great skill beats five mediocre ones.
+
+**3. Honesty over aspiration.**
 Write your `me/` files about how you ACTUALLY work, not how you wish you worked. If you never do a proper weekly review, say so. If you walk into every meeting unprepared, say so. Your AI can't help you improve a system it doesn't understand.
 
-**3. Your system should be yours.**
+**4. Your system should be yours.**
 Don't copy someone else's priorities, meeting categories, or reflection questions. The examples in this kit show different patterns so you can see the range — pick what resonates with YOUR work, or write your own.
 
-**4. The `me/` files are the investment.**
+**5. The `me/` files are the investment.**
 Everything else — skills, outputs, architecture — follows from how well your AI understands you. If your skills feel generic, the fix is usually in your `me/` files, not in the skill instructions.
 
-**5. Review and maintain.**
+**6. Review and maintain.**
 The system degrades if you don't maintain it. Stale priorities make your AI focus on the wrong things. Outdated team info makes meeting prep useless. The weekly review skill exists specifically to keep everything fresh.
 
 ---
 
 ## Further Reading
 
-- **`architecture-patterns.md`** — The 3 transferable ideas that make the system work
+### In this kit
+- **[Visual system overview](https://aneinstein.github.io/ai-chief-of-staff-starter-kit/overview.html)** — One-page visual walkthrough of what the full system looks like
+- **`architecture-patterns.md`** — The 4 transferable ideas that make the system work
 - **`skills/README.md`** — Deep dive on how to build and refine skills
-- **Claude Code documentation** — [docs.anthropic.com](https://docs.anthropic.com)
+
+### Background and lessons learned
+- **[I Built Myself an AI Chief of Staff. Here's What It Looks Like.](https://www.linkedin.com/pulse/i-built-myself-ai-chief-staff-heres-what-looks-like-aaron-neinstein-keohc)** — Full walkthrough of the system, from individual agents to the compounding rhythm
+- **[What I've Learned Building AI Agents for My Own Day-to-Day Use (Part 1)](https://www.linkedin.com/pulse/what-weve-learned-building-ai-agents-ourselves-aaron-neinstein-lxfkc)** — The five categories of agents that consistently deliver value
+- **[How I Think About Building AI Agents That Actually Get Used (Part 2)](https://www.linkedin.com/pulse/how-i-think-building-ai-agents-actually-get-used-aaron-neinstein-hrgbc)** — Eight hard-won lessons, including why 70% good is a trap
+- **[Where to Begin Without Feeling Overwhelmed](https://www.linkedin.com/posts/aaronneinstein_have-talked-to-a-lot-of-people-recently-who-activity-7442238969162915840-TGBu)** — Four practical steps for non-technical professionals who feel behind on AI
+- **[5-minute video walkthrough of the live system](https://www.linkedin.com/posts/aaronneinstein_several-weeks-ago-i-published-an-article-ugcPost-7455089750731825152-27A6)** — Unscripted demo showing the system in action
+
+### Tools
+- **Claude Code** — [claude.ai/download](https://claude.ai/download)
+- **Obsidian** (recommended markdown editor) — [obsidian.md](https://obsidian.md)

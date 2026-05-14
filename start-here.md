@@ -16,6 +16,7 @@ It's a small thing. But once you feel the difference between walking into a meet
 
 - **Claude Code** installed on your computer ([claude.ai/download](https://claude.ai/download))
 - **A Google Calendar** (or Outlook — any calendar that has an MCP connector)
+- **A markdown editor** — [Obsidian](https://obsidian.md) (free) is recommended. It turns `.md` files into something that looks and feels like a notes app, which makes editing your workspace files much more pleasant if you're not used to working with code.
 - **About an hour** of uninterrupted time
 - That's it. No APIs to configure. No databases. No deployment.
 
@@ -146,15 +147,17 @@ Each of those observations becomes an improvement. Add context to `me/how-i-work
 
 ## What to Build Next
 
-Once your meeting prep agent is working, here are natural next steps (in rough order of effort):
+Once your meeting prep agent is working, here are natural next steps (in rough order of impact):
 
-1. **Weekly review** — A Friday afternoon skill that looks at your past week (meetings, tasks, notes) and helps you plan next week. 30 minutes to build.
+1. **Morning briefing** — A daily skill that combines your calendar, tasks, and recent messages into a single "here's your day" document. This is the single highest-value skill after meeting prep — it replaces the 15 minutes of tab-switching you do every morning. 2-3 hours to build.
 
-2. **Action item sweep** — A skill that reads your meeting notes and extracts action items into your task manager. 1 hour to build.
+2. **Weekly review** — A Friday afternoon skill that looks at your past week (meetings, tasks, notes) and helps you plan next week. This is the habit that keeps the whole system healthy. 30 minutes to build.
 
-3. **1:1 prep** — A richer version of meeting prep specifically for your recurring 1:1s, with relationship context and running themes. 1-2 hours to build.
+3. **Action item sweep** — A skill that reads your meeting notes and extracts action items, delegated tasks, and follow-ups. The gap between "discussed in a meeting" and "tracked in a system" is where most dropped balls live. 1 hour to build.
 
-4. **Morning briefing** — A daily skill that combines your calendar, tasks, and recent messages into a single "here's your day" document. 2-3 hours to build.
+4. **Voice memo capture** — Record a 3-5 minute voice memo each evening about your day. Your AI transcribes it and feeds it into tomorrow's briefing. This is the lowest-effort, highest-context input channel. See `architecture-patterns.md` Pattern 4 for how this creates a compounding cycle.
+
+5. **Industry radar** — A skill that scans news, publications, and feeds relevant to your field and produces a curated brief of what matters. Useful when staying current is part of your job but you can't read everything.
 
 Each one teaches you something about how to make the system better. The people who get the most out of this aren't the best programmers — they're the people who are most honest about how they actually work and most willing to iterate.
 

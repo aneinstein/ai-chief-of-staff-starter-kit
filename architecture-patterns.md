@@ -1,6 +1,6 @@
 # Architecture Patterns — The Ideas That Transfer
 
-These three patterns are the architectural foundation of an AI chief of staff system. They work regardless of which tools you use. If you adopt nothing else from this kit, adopt these.
+These four patterns are the architectural foundation of an AI chief of staff system. They work regardless of which tools you use. If you adopt nothing else from this kit, adopt these.
 
 ---
 
@@ -163,6 +163,73 @@ Caching too aggressively. Don't cache things that change frequently (like "unrea
 
 ---
 
+## Pattern 4: The Compounding Rhythm
+
+### The idea
+
+Individual AI skills are useful. But the real leverage comes when skills feed each other in a daily cycle — where the output of one skill becomes the input to the next. A voice memo you record in the evening feeds the next morning's briefing, which feeds meeting prep, which feeds an end-of-day action sweep, which feeds the next day's briefing. The system compounds.
+
+### Why it matters
+
+- **Continuity across days.** Without a rhythm, each AI session starts from zero. With one, yesterday's context carries forward automatically.
+- **Capture without effort.** Most knowledge workers have insights throughout the day that disappear by tomorrow. A rhythm creates natural capture points.
+- **Compound returns.** A meeting prep that knows what you said in last night's voice memo is dramatically better than one that only reads your calendar. Each layer of context makes the others more useful.
+
+### How it works
+
+```
+Evening:
+  Record a voice memo — stream of consciousness about the day,
+  what's on your mind, what you need to think about tomorrow.
+  (3-5 minutes, low effort)
+      │
+      ▼
+Morning:
+  Daily briefing reads the voice memo + today's calendar + open tasks
+  and produces "here's your day" — priorities, prep needed, loose ends.
+      │
+      ▼
+Before meetings:
+  Meeting prep skill reads the briefing context + relationship notes
+  and produces per-meeting briefs.
+      │
+      ▼
+End of day:
+  Action sweep reads meeting transcripts/notes and extracts action items,
+  delegated tasks, decisions made, follow-ups owed.
+      │
+      ▼
+Evening:
+  Record another voice memo. The cycle repeats.
+```
+
+### The voice memo as input channel
+
+Voice memos are the lowest-friction way to feed your AI system. They don't require typing, formatting, or even sitting down. A 3-minute recording while walking to your car captures more context than most people put into writing all day.
+
+Your AI can transcribe and process these memos. The key is consistency — the memo doesn't have to be polished or comprehensive. It just needs to be honest about what happened, what you're thinking, and what's ahead.
+
+**What to say in a voice memo:**
+- What happened today that matters
+- What's on your mind for tomorrow
+- Anything you promised someone
+- Ideas or concerns you don't want to forget
+- How you're feeling about your priorities
+
+### When you need this
+
+You don't need the full cycle on day one. Start with one link:
+- A morning briefing that reads your calendar (even without a voice memo, this is valuable)
+- An action sweep that processes your meeting notes
+
+Then add links over time. The rhythm emerges naturally as you notice "this skill would be so much better if it knew what I said last night."
+
+### Common mistake
+
+Building the entire cycle at once. Start with one skill (morning briefing or meeting prep). Get it to 90%+ quality. Then add the next link. Each link should solve a real pain point, not complete an architecture diagram.
+
+---
+
 ## How These Patterns Build on Each Other
 
 ```
@@ -174,6 +241,9 @@ Pattern 2 (Sub-Agents)
 
 Pattern 3 (Shared Caching)
     solves the problem of multiple skills needing the same data
+
+Pattern 4 (Compounding Rhythm)
+    connects skills into a daily cycle where each one feeds the next
 ```
 
-Start with Pattern 1. It's required. Patterns 2 and 3 are optimizations you add when your system grows complex enough to need them. Most people can run happily with just Pattern 1 for months.
+Start with Pattern 1. It's required. Pattern 4 (the rhythm) is the next most important — even a simple two-skill rhythm (morning briefing + weekly review) transforms the experience. Patterns 2 and 3 are optimizations you add when your system grows complex enough to need them.
